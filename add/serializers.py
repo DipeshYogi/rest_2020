@@ -9,5 +9,3 @@ class ItemsSerializer(serializers.ModelSerializer):
         class Meta:
             model = models.Items
             fields = ('name','price','exp_date')
-
-        
