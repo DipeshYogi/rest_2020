@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . serializers import AddSerializer, ItemsSerializer
+from . serializers import AddSerializer, ItemsSerializer, ItemsUpdateSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -35,3 +35,15 @@ class CreateItemView(APIView):
             return Response({'Item created successfully'})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UpdateItemView(APIView):
+    serializer_class = ItemsUpdateSerializer
+
+    def put(self,request):
+        ser = self.serializer_class(data=request.data)
+        if ser.is_valid():
+            name = ser.validated_data.get('name')
+            pr = ser.validated_data.get('price')
+            models.Items.objects.filter(name=name).update(price = pr)
+
+        return Response({'put'})
