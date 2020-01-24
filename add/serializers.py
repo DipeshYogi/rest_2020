@@ -14,3 +14,8 @@ class ItemDetailsSerializer(serializers.ModelSerializer):
         class Meta:
             model = models.Items
             fields = ('name',)
+
+class ItemsUpdateSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = models.Items
+            fields = ('name','price',)
